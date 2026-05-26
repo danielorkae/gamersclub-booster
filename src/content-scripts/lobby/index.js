@@ -6,6 +6,7 @@ import { adicionarBotaoAutoComplete } from './botaoAutoComplete';
 import { lobbyLink } from './lobbyLink';
 import { autoCopyLobbyLink, resetLobbyLinkState } from './autoCopyLobbyLink';
 import { mostrarInfoPlayerIntervaler, mostrarKdr, mostrarKdrDesafios, mostrarKdrRanked, showKdrMatch } from './mostrarKdr';
+import { mostrarTrustRating } from './mostrarTrustRating';
 import { partidaInfo } from './partidaInfo';
 import { somReady, somReadySetInterval, tocarSomSeVoceForExpulsoDaLobby } from './sons';
 import { adicionarFiltroKdr } from './filtrarKdr';
@@ -43,6 +44,7 @@ const initLobby = async () => {
   criarObserver( '.lobby', autoCopyLobbyLink );
 
   criarObserver( '#lobbies-wrapper', mostrarKdr );
+  criarObserver( '#lobbies-wrapper', mostrarTrustRating );
   criarObserver( '#lobbies-wrapper', infoLobby );
   criarObserver( '.lobby', infoChallenge );
   criarObserver( '#GamersClubCSApp-globals-globalToaster', tocarSomSeVoceForExpulsoDaLobby );

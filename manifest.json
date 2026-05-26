@@ -7,12 +7,16 @@
     "48": "images/icon_128.png",
     "128": "images/icon_128.png"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
   "host_permissions": [
     "https://*.gamersclub.com.br/",
     "https://cs.gamersclub.gg/",
-    "https://discord.com/api/webhooks/*"
+    "https://discord.com/api/webhooks/*",
+    "https://csrep.gg/*"
   ],
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "content_scripts": [
     {
       "matches": ["*://*.gamersclub.com.br/*", "*://cs.gamersclub.gg/*"],
@@ -51,6 +55,11 @@
       ],
       "js": ["content-scripts/lobby.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["https://csrep.gg/*"],
+      "js": ["content-scripts/csrep.js"],
+      "run_at": "document_idle"
     },
     {
       "matches": [

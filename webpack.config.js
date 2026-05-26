@@ -9,6 +9,8 @@ const contentScripts = name => resolveEntries( `./src/content-scripts/${name}/*.
 module.exports = {
   mode: 'production',
   entry: {
+    'background': './src/background.js',
+    'content-scripts/csrep': './src/content-scripts/csrep/index.js',
     'index': resolveEntries( './src/options/*.js' ),
     'content-scripts/main': contentScripts( 'main' ),
     'content-scripts/lobby': contentScripts( 'lobby' ),

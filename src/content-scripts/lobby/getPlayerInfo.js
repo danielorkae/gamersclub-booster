@@ -82,11 +82,16 @@ export async function getPlayerInfo( id ) {
     totalJogos > 0 ? ( ( totalVitorias / totalJogos ) * 100 ).toFixed( 2 ) : '0.00';
 
         const anotacao = getAnotacao( html );
+        const steamLink = $html.find( 'a[href*="steamcommunity.com/profiles/"]' ).attr( 'href' );
+        const steamIdMatch = steamLink?.match( /steamcommunity\.com\/profiles\/(\d+)/ );
+        const steamId = steamIdMatch?.[1] || null;
+
         const response = {
           dataCriacao,
           totalPartidas,
           porcentagemVitoria,
           anotacao,
+          steamId,
           ttl: Date.now() + DOIS_DIAS
         };
 

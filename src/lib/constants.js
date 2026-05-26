@@ -68,7 +68,8 @@ export const features = [
   'autoKickNegativados',
   'autoCopyLobbyLink',
   'showStats',
-  'filtrarKdrMedioLobby'
+  'filtrarKdrMedioLobby',
+  'mostrarTrustRating'
 ];
 export const preVetosMapas = [
   {
