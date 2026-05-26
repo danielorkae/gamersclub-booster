@@ -367,6 +367,12 @@ input[type="range"].filterKdr::-ms-track {
   align-items: center;
 }
 
+.LobbyChallengeCard__item,
+.LobbyChallengeCard__container {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
 .LobbyChallengeLineUpCard .gcbooster_lupa {
   transform: translateX(-50%);
 }

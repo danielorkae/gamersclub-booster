@@ -6,7 +6,7 @@ import { adicionarBotaoAutoComplete } from './botaoAutoComplete';
 import { lobbyLink } from './lobbyLink';
 import { autoCopyLobbyLink, resetLobbyLinkState } from './autoCopyLobbyLink';
 import { mostrarInfoPlayerIntervaler, mostrarKdr, mostrarKdrDesafios, mostrarKdrRanked, showKdrMatch } from './mostrarKdr';
-import { mostrarTrustRating } from './mostrarTrustRating';
+import { mostrarTrustRating, mostrarTrustRatingDesafios, showTrustRatingMatch } from './mostrarTrustRating';
 import { partidaInfo } from './partidaInfo';
 import { somReady, somReadySetInterval, tocarSomSeVoceForExpulsoDaLobby } from './sons';
 import { adicionarFiltroKdr } from './filtrarKdr';
@@ -51,6 +51,7 @@ const initLobby = async () => {
 
 
   mostrarKdrDesafios();
+  mostrarTrustRatingDesafios();
 
   // Esconde a sugestão de lobbies para entrar
   ocultarSugestaoDeLobbies();
@@ -85,6 +86,7 @@ const initLobby = async () => {
   lobbyMapSuggestions();
   showPlayerSoloStats();
   showKdrMatch();
+  showTrustRatingMatch();
   adicionarFiltroKdr();
 };
 
