@@ -83,6 +83,14 @@ export const mostrarTrustRating = async mutations => {
         const steamId = playerData?.steamId;
         if ( !steamId ) { return; }
 
+        $badge
+          .css( 'cursor', 'pointer' )
+          .on( 'click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.open( `https://csrep.gg/player/${steamId}`, '_blank' );
+          } );
+
         const rating = await fetchTrustRating( steamId );
         if ( rating === null || rating === undefined ) { return; }
 
@@ -91,12 +99,7 @@ export const mostrarTrustRating = async mutations => {
 
         $badge
           .css( { ...badgeStyles, 'color': color, 'cursor': 'pointer' } )
-          .html( `<span style="color:#fff">CS</span><span style="color:#0df397">REP</span> ${score}%` )
-          .on( 'click', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            window.open( `https://csrep.gg/player/${steamId}`, '_blank' );
-          } );
+          .html( `<span style="color:#fff">CS</span><span style="color:#0df397">REP</span> ${score}%` );
       } );
   } );
 };
