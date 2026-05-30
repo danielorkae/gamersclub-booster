@@ -1,5 +1,7 @@
 import { GC_URL, headers, levelColor } from '../../lib/constants';
 import { getFromStorage, setStorage } from '../../lib/storage';
+import { getPlayerInfo as getPlayerInfoLupa } from './getPlayerInfo';
+import { fetchTrustRating, getTrustRatingColor } from './mostrarTrustRating';
 
 export const mostrarKdr = mutations => {
   $.each( mutations, async ( _, mutation ) => {
@@ -264,10 +266,37 @@ export const mostrarInfoPlayerIntervaler = () => {
               </div>
               <div class="losses">Derrotas: ${playerLoss}</div>
             </div>
+            <div id="gcboost-csrep-${playerId}" style="font-size:9px;text-align:center;padding:1px 0;">
+              <span style="color:rgba(255,255,255,0.15)">CS</span><span style="color:rgba(13,243,151,0.15)">REP</span> —
+            </div>
           </div>`;
 
               $nodeChildren.prepend( flagImg );
               $element.append( infos );
+
+              getFromStorage( 'mostrarTrustRating', 'sync' ).then( enabled => {
+                if ( !enabled ) { return; }
+                getPlayerInfoLupa( playerId ).then( playerData => {
+                  const steamId = playerData?.steamId;
+                  if ( !steamId ) { return; }
+                  fetchTrustRating( steamId ).then( rating => {
+                    if ( rating === null || rating === undefined ) { return; }
+                    const color = getTrustRatingColor( Number( rating ) );
+                    const score = Math.floor( Number( rating ) );
+                    const $csrep = $( `#gcboost-csrep-${playerId}` );
+                    $csrep
+                      .css( 'cursor', 'pointer' )
+                      .html( '<span style="color:#fff">CS</span>' +
+                        '<span style="color:#0df397">REP</span>' +
+                        `<span style="color:${color}"> ${score}%</span>` )
+                      .on( 'click', e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open( `https://csrep.gg/player/${steamId}`, '_blank' );
+                      } );
+                  } );
+                } );
+              } );
 
             } ).catch( error => {
               console.error( 'Erro ao obter informações do jogador:', error );

@@ -15,14 +15,14 @@ const limparCache = async () => {
   }
 };
 
-const getTrustRatingColor = score => {
+export const getTrustRatingColor = score => {
   if ( score === 100 ) { return '#0df397'; }
   if ( score < 50 ) { return '#eb2f2f'; }
   const hue = Math.round( ( score - 50 ) / 49 * 60 );
   return `hsl(${hue}, 80%, 50%)`;
 };
 
-const fetchTrustRating = async steamId => {
+export const fetchTrustRating = async steamId => {
   await limparCache();
 
   const cache = await getFromStorage( 'trustRatingCache' ) || {};
